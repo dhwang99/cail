@@ -1,9 +1,12 @@
 
 do_seg_docs=0
 gen_word_dist=0
-do_feature_select=0
+do_feature_select=1
 
-if [$do_seg_docs -eq 1 ]
+trainfile='segdocs/big.seged.clear'
+testfile='segdocs/test.seged'
+
+if [ $do_seg_docs -eq 1 ]
 then
     python seg_doc.py ../data/cail2018_big/id.cail2018_big.json segdocs/big.seged
     python seg_doc.py ../data/cail_0518/id.data_test.json segdocs/test.seged
@@ -16,9 +19,6 @@ ngram=1
 methods='CE ECE DF'
 ngram=3
 
-
-trainfile='segdocs/big.seged.clear'
-testfile='segdocs/test.seged'
 
 wd_f="conf/word_${ngram}_gram.dist"
 fea_prefix="features/${ngram}gram"
@@ -41,7 +41,7 @@ fi
 for method in $methods
 do
     fea_filename="${fea_prefix}_by_${method}.json"
-    python doc2svm.py $trainfile svm_format_samples/train.${method}_${ngram} $fea_filename  100000
-    python doc2svm.py $testfile svm_format_samples/test.${method}_${ngram} $fea_filename 100000 
+    python doc2svm.py $trainfile svm_format_samples/train.${method}_${ngram} $fea_filename  300000
+    python doc2svm.py $testfile svm_format_samples/test.${method}_${ngram} $fea_filename 300000 
 done
 

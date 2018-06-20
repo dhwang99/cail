@@ -29,7 +29,7 @@ def knn_classifier(train_x, train_y):
 # Logistic Regression Classifier  
 def logistic_regression_classifier(train_x, train_y):  
     from sklearn.linear_model import LogisticRegression  
-    model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=8)  
+    model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=16, solver='sag')  
     model.fit(train_x, train_y)  
     return model  
   

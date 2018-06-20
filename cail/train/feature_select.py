@@ -129,5 +129,4 @@ method=sys.argv[3]
 general_dist,detail_dist_list = load_word_dist(word_dist_fname)
 docs_num = general_dist[0][0]
 rlst = select_feature(general_dist, detail_dist_list, method, low_bound=20)
-fname = '%s_by_%s' % (out_fname, method)
-save_features(rlst, fname, docs_num)
+save_features(rlst, out_fname, docs_num)
