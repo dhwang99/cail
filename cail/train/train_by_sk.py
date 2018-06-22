@@ -29,15 +29,15 @@ def knn_classifier(train_x, train_y):
 # Logistic Regression Classifier  
 def logistic_regression_classifier(train_x, train_y):  
     from sklearn.linear_model import LogisticRegression  
-    model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=16, solver='sag')  
+    model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=16, solver='lbfgs')
     model.fit(train_x, train_y)  
-    return model  
+    return model 
   
   
 # Random Forest Classifier  
 def random_forest_classifier(train_x, train_y):  
     from sklearn.ensemble import RandomForestClassifier  
-    model = RandomForestClassifier(n_estimators=8)  
+    model = RandomForestClassifier(n_estimators=16, n_jobs=16, class_weight='balanced')  
     model.fit(train_x, train_y)  
     return model  
   
@@ -127,7 +127,8 @@ if __name__ == '__main__':
     model_save = {}  
       
     test_classifiers = ['NB', 'LR', 'RF', 'DT', 'GBDT','SVM', 'SVMCV', 'KNN']
-    test_classifiers = ['NB', 'LR', 'RF', 'DT', 'GBDT', 'KNN']
+    test_classifiers = ['NB', 'RF', 'DT', 'GBDT', 'LR', 'KNN']
+    test_classifiers = ['NB', 'RF', 'DT', 'GBDT', 'LR', 'KNN']
     classifiers = {'NB':naive_bayes_classifier,
                   'KNN':knn_classifier,
                    'LR':logistic_regression_classifier,

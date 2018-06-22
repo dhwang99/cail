@@ -74,7 +74,7 @@ for line in infile:
     #
     arcs = meta['relevant_articles']
     #
-    word_pos = pseg.cut(fact, hmm=False)
+    word_pos = pseg.cut(fact, HMM=False)
     ss = "%s\t%s\t%s\t%s\n" % (lineid, ','.join(accids), ','.join([str(x) for x in arcs]), ','.join([x + " " + y for x,y in word_pos if x != ' ' and x != ',']))
 
     ss = ss.encode('utf8')

@@ -3,6 +3,10 @@ methods="MI CE DF"
 fea_nums="1500 5000 10000 15000 30000 50000 100000"
 
 methods="CE"
+fea_nums="1200000"
+ngram=3
+
+methods="CE"
 fea_nums="100000"
 ngram=1
 

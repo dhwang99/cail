@@ -1,23 +1,27 @@
 
-do_seg_docs=0
+do_seg_docs=1
 gen_word_dist=0
 do_feature_select=1
 
+rawtrainfile='segdocs/big.seged'
 trainfile='segdocs/big.seged.clear'
 testfile='segdocs/test.seged'
 
 if [ $do_seg_docs -eq 1 ]
 then
-    python seg_doc.py ../data/cail2018_big/id.cail2018_big.json segdocs/big.seged
-    python seg_doc.py ../data/cail_0518/id.data_test.json segdocs/test.seged
+    python seg_docs.py ../data/cail2018_big/id.cail2018_big.json $rawtrainfile
+    python seg_docs.py ../data/cail_0518/id.data_test.json $testfile
+    
+    python dedup_doc $testfile $rawtrainfile $trainfile
+    exit
 fi
 
 
-methods='MI'
-ngram=1
-
 methods='CE ECE DF'
 ngram=3
+
+methods='MI'
+ngram=1
 
 
 wd_f="conf/word_${ngram}_gram.dist"
