@@ -18,7 +18,7 @@ loop_train()
     min_df=$4
     train_fname=$5
 
-    for dim in $dims2
+    for dim in $dims
     do
         echo "Process $dim"
         python3 svm.py  $dim $seg_method $ngram  $min_df $train_fname &
