@@ -109,7 +109,11 @@ def load_word_dist(fname='conf/word.dist'):
 def save_features(features, outfn, total_docs_num):
     # w,rank, w_c_nums: 
     def  idf(df):
-        return np.log(total_docs_num*1./df)
+        val = np.log(total_docs_num*1./df)
+        if val < 1e-10:
+            val = 1e-10
+        return val
+
     features = map(lambda x,y:(y, x[0],x[1], x[2][0][1], idf(x[2][0][1])), features, range(1, len(features)+1))
     with open(outfn + ".json", 'w') as outf:
         json.dump(features, outf, indent=2)

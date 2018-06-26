@@ -58,11 +58,11 @@ for line in infile:
             words.setdefault(w, 0)
             words[w] += 1
             la += 1
-            if la >= 2 and ngram >= 2:
+            if la >= 2 and ngram == 2:
                 w2 = "%s_%s" % (word_poses[wi-1][0], w)
                 words.setdefault(w2, 0)
                 words[w2] += 1
-                if la >= 3 and ngram >= 3:
+                if la >= 3 and ngram == 3:
                     w3 = "%s_%s" % (word_poses[wi-2][0], w2)
                     words.setdefault(w3, 0)
                     words[w3] += 1

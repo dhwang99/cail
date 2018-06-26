@@ -1,5 +1,5 @@
 
-do_seg_docs=1
+do_seg_docs=0
 gen_word_dist=0
 do_feature_select=1
 
@@ -11,17 +11,17 @@ if [ $do_seg_docs -eq 1 ]
 then
     python seg_docs.py ../data/cail2018_big/id.cail2018_big.json $rawtrainfile
     python seg_docs.py ../data/cail_0518/id.data_test.json $testfile
-    
-    python dedup_doc $testfile $rawtrainfile $trainfile
+
+    python dedup_doc.py $testfile $rawtrainfile $trainfile
     exit
+    
 fi
 
-
-methods='CE ECE DF'
-ngram=3
-
-methods='MI'
+methods='DF'
 ngram=1
+
+methods='CE MI DF'
+ngram=2
 
 
 wd_f="conf/word_${ngram}_gram.dist"

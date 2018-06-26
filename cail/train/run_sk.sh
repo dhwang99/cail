@@ -6,7 +6,8 @@ methods="CE"
 fea_nums="1200000"
 ngram=3
 
-methods="CE"
+
+methods="DF"
 fea_nums="100000"
 ngram=1
 

@@ -1,0 +1,1342 @@
+run.sh: 10: run.sh: Syntax error: "(" unexpected
+run.sh: 12: run.sh: Syntax error: "(" unexpected
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpzmr_z58q' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpzmr_z58q' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:28:58,792  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpzmr_z58q' -> '/tmp/jieba.cache'
+Loading model cost 1.123 seconds.
+DEBUG:jieba:Loading model cost 1.123 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpva6vha5o' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpva6vha5o' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:28:58,867  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpva6vha5o' -> '/tmp/jieba.cache'
+Loading model cost 1.106 seconds.
+DEBUG:jieba:Loading model cost 1.106 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpggkoco5t' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpggkoco5t' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:28:58,890  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpggkoco5t' -> '/tmp/jieba.cache'
+Loading model cost 1.112 seconds.
+DEBUG:jieba:Loading model cost 1.112 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp3mn6dfru' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp3mn6dfru' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:28:58,935  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp3mn6dfru' -> '/tmp/jieba.cache'
+Loading model cost 1.134 seconds.
+DEBUG:jieba:Loading model cost 1.134 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp5_4ddy6e' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp5_4ddy6e' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:28:58,999  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp5_4ddy6e' -> '/tmp/jieba.cache'
+Loading model cost 1.129 seconds.
+DEBUG:jieba:Loading model cost 1.129 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+INFO:root:Seg:jieba DIM:100000 NGRAM:3 RESULT: ACCU:(0.8203, 0.6933, 0.7568); LAW:(0.7875, 0.6505, 0.7190) TIME: 0.5103
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8203129648360802, 0.6932858985721546, 0.7567994317041173), (0.7875215933340108, 0.6504865818041164, 0.7190040875690636), 0.5102559370000871]
+2018-06-26 07:48:34,444   INFO Seg:jieba DIM:100000 NGRAM:3 RESULT: ACCU:(0.8203, 0.6933, 0.7568); LAW:(0.7875, 0.6505, 0.7190) TIME: 0.5103
+INFO:root:Seg:jieba DIM:150000 NGRAM:3 RESULT: ACCU:(0.8218, 0.6927, 0.7572); LAW:(0.7888, 0.6510, 0.7199) TIME: 0.5114
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8217706907836021, 0.6926941914009691, 0.7572324410922856), (0.7887990477158245, 0.6510349577749968, 0.7199170027454107), 0.5113818137073595]
+2018-06-26 07:50:34,989   INFO Seg:jieba DIM:150000 NGRAM:3 RESULT: ACCU:(0.8218, 0.6927, 0.7572); LAW:(0.7888, 0.6510, 0.7199) TIME: 0.5114
+INFO:root:Seg:jieba DIM:200000 NGRAM:3 RESULT: ACCU:(0.8224, 0.6957, 0.7591); LAW:(0.7896, 0.6522, 0.7209) TIME: 0.5132
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8224251799845302, 0.6956947723164874, 0.7590599761505088), (0.7895539071232598, 0.6521768936772016, 0.7208654004002306), 0.51316598991014]
+2018-06-26 07:51:10,402   INFO Seg:jieba DIM:200000 NGRAM:3 RESULT: ACCU:(0.8224, 0.6957, 0.7591); LAW:(0.7896, 0.6522, 0.7209) TIME: 0.5132
+INFO:root:Seg:jieba DIM:300000 NGRAM:3 RESULT: ACCU:(0.8223, 0.6926, 0.7574); LAW:(0.7903, 0.6514, 0.7209) TIME: 0.5142
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8223061819479979, 0.6925826142353426, 0.7574443980916703), (0.790279733476563, 0.6514487565826544, 0.7208642450296088), 0.5141565153192703]
+2018-06-26 07:52:25,695   INFO Seg:jieba DIM:300000 NGRAM:3 RESULT: ACCU:(0.8223, 0.6926, 0.7574); LAW:(0.7903, 0.6514, 0.7209) TIME: 0.5142
+INFO:root:Seg:jieba DIM:4000000 NGRAM:3 RESULT: ACCU:(0.8232, 0.6963, 0.7598); LAW:(0.7927, 0.6541, 0.7234) TIME: 0.5162
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.823228416731124, 0.6962942539187723, 0.7597613353249482), (0.7926604439153977, 0.6541398860174981, 0.7234001649664479), 0.5162298511135367]
+2018-06-26 07:55:04,942   INFO Seg:jieba DIM:4000000 NGRAM:3 RESULT: ACCU:(0.8232, 0.6963, 0.7598); LAW:(0.7927, 0.6541, 0.7234) TIME: 0.5162
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Building prefix dict from the default dictionary ...
+DEBUG:jieba:Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+DEBUG:jieba:Loading model from cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dumping model to file cache /tmp/jieba.cache
+DEBUG:jieba:Dumping model to file cache /tmp/jieba.cache
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpm2e0kc53' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpm2e0kc53' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:55:15,076  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpm2e0kc53' -> '/tmp/jieba.cache'
+Loading model cost 1.112 seconds.
+DEBUG:jieba:Loading model cost 1.112 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmphmwj2a7z' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmphmwj2a7z' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:55:15,094  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmphmwj2a7z' -> '/tmp/jieba.cache'
+Loading model cost 1.111 seconds.
+DEBUG:jieba:Loading model cost 1.111 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp_7k_bv_s' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp_7k_bv_s' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:55:15,130  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp_7k_bv_s' -> '/tmp/jieba.cache'
+Loading model cost 1.127 seconds.
+DEBUG:jieba:Loading model cost 1.127 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp5xgmae37' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp5xgmae37' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:55:15,184  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmp5xgmae37' -> '/tmp/jieba.cache'
+Loading model cost 1.097 seconds.
+DEBUG:jieba:Loading model cost 1.097 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpv2spsdxa' -> '/tmp/jieba.cache'
+ERROR:jieba:Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpv2spsdxa' -> '/tmp/jieba.cache'
+reading...
+cut text...
+Model loaded succeed
+2018-06-26 07:55:15,194  ERROR Dump cache file failed.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.4/dist-packages/jieba/__init__.py", line 152, in initialize
+    _replace_file(fpath, cache_file)
+PermissionError: [Errno 1] Operation not permitted: '/tmp/tmpv2spsdxa' -> '/tmp/jieba.cache'
+Loading model cost 1.104 seconds.
+DEBUG:jieba:Loading model cost 1.104 seconds.
+Prefix dict has been built succesfully.
+DEBUG:jieba:Prefix dict has been built succesfully.
+INFO:root:Seg:jieba DIM:100000 NGRAM:3 RESULT: ACCU:(0.8203, 0.6933, 0.7568); LAW:(0.7875, 0.6505, 0.7190) TIME: 0.5103
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8203129648360802, 0.6932858985721546, 0.7567994317041173), (0.7875215933340108, 0.6504865818041164, 0.7190040875690636), 0.5102559370000871]
+2018-06-26 08:16:28,829   INFO Seg:jieba DIM:100000 NGRAM:3 RESULT: ACCU:(0.8203, 0.6933, 0.7568); LAW:(0.7875, 0.6505, 0.7190) TIME: 0.5103
+INFO:root:Seg:jieba DIM:200000 NGRAM:3 RESULT: ACCU:(0.8224, 0.6957, 0.7591); LAW:(0.7896, 0.6522, 0.7209) TIME: 0.5131
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8224251799845302, 0.6956947723164874, 0.7590599761505088), (0.7895539071232598, 0.6521768936772016, 0.7208654004002306), 0.5131413805832051]
+2018-06-26 08:18:15,988   INFO Seg:jieba DIM:200000 NGRAM:3 RESULT: ACCU:(0.8224, 0.6957, 0.7591); LAW:(0.7896, 0.6522, 0.7209) TIME: 0.5131
+INFO:root:Seg:jieba DIM:150000 NGRAM:3 RESULT: ACCU:(0.8218, 0.6927, 0.7572); LAW:(0.7888, 0.6510, 0.7199) TIME: 0.5114
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8217706907836021, 0.6926941914009691, 0.7572324410922856), (0.7887990477158245, 0.6510349577749968, 0.7199170027454107), 0.5113818137073595]
+2018-06-26 08:18:20,499   INFO Seg:jieba DIM:150000 NGRAM:3 RESULT: ACCU:(0.8218, 0.6927, 0.7572); LAW:(0.7888, 0.6510, 0.7199) TIME: 0.5114
+INFO:root:Seg:jieba DIM:300000 NGRAM:3 RESULT: ACCU:(0.8223, 0.6926, 0.7574); LAW:(0.7903, 0.6514, 0.7209) TIME: 0.5142
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.8223061819479979, 0.6925826142353426, 0.7574443980916703), (0.790279733476563, 0.6514487565826544, 0.7208642450296088), 0.5141565153192703]
+2018-06-26 08:19:28,472   INFO Seg:jieba DIM:300000 NGRAM:3 RESULT: ACCU:(0.8223, 0.6926, 0.7574); LAW:(0.7903, 0.6514, 0.7209) TIME: 0.5142
+INFO:root:Seg:jieba DIM:4000000 NGRAM:3 RESULT: ACCU:(0.8232, 0.6963, 0.7598); LAW:(0.7927, 0.6541, 0.7234) TIME: 0.5162
+2000
+4000
+6000
+8000
+10000
+12000
+14000
+16000
+18000
+20000
+22000
+24000
+26000
+28000
+30000
+32000
+34000
+36000
+38000
+40000
+42000
+44000
+46000
+48000
+50000
+52000
+54000
+56000
+58000
+60000
+62000
+64000
+66000
+68000
+70000
+72000
+74000
+76000
+78000
+80000
+82000
+84000
+86000
+88000
+90000
+92000
+94000
+96000
+98000
+100000
+102000
+104000
+106000
+108000
+110000
+112000
+114000
+116000
+118000
+120000
+122000
+124000
+126000
+128000
+130000
+132000
+134000
+136000
+138000
+140000
+142000
+144000
+146000
+148000
+150000
+152000
+154000
+train tfidf...
+accu SVC
+law SVC
+time SVC
+[(0.823228416731124, 0.6962942539187723, 0.7597613353249482), (0.7926604439153977, 0.6541398860174981, 0.7234001649664479), 0.5162298511135367]
+2018-06-26 08:22:19,538   INFO Seg:jieba DIM:4000000 NGRAM:3 RESULT: ACCU:(0.8232, 0.6963, 0.7598); LAW:(0.7927, 0.6541, 0.7234) TIME: 0.5162
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Traceback (most recent call last):
+  File "svm.py", line 168, in <module>
+    jieba.setLogLevel(CRITICAL)
+NameError: name 'CRITICAL' is not defined
+Process 100000
+Process 150000
+Process 200000
+Process 300000
+Process 4000000

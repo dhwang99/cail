@@ -6,6 +6,35 @@ from sklearn import metrics
 import numpy as np  
 import cPickle as pickle  
 import pdb
+import logging
+
+'''
+    logfilename="../log/train.log
+    logger = create_logger(logfilename)
+
+    logger = logging.getLogger()
+    infostr = "tagid: %s or method:%s is not digit." % (tagid, method)
+    logger.info(infostr)
+    logger.debug(infostr)
+'''
+def create_logger(logfilename , logName=None) :
+    import logging,logging.handlers
+    logger = logging.getLogger(logName)
+    infohdlr = logging.StreamHandler(sys.stdout)
+    infohdlr.setLevel(logging.INFO)
+    #detail
+    debughdlr = logging.StreamHandler(sys.stdout)
+    debughdlr.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s %(levelname)6s  %(threadName)-12s %(filename)-10s  %(lineno)4d:%(funcName)16s|| %(message)s')
+
+    infohdlr.setFormatter(formatter)
+    debughdlr.setFormatter(formatter)
+
+    logger.addHandler(infohdlr)
+    #logger.addHandler(debughdlr)
+
+    logger.setLevel(logging.DEBUG)
+    return logger
   
 reload(sys) 
 sys.setdefaultencoding('utf8')  
@@ -29,10 +58,23 @@ def knn_classifier(train_x, train_y):
 # Logistic Regression Classifier  
 def logistic_regression_classifier(train_x, train_y):  
     from sklearn.linear_model import LogisticRegression  
-    model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=16, solver='lbfgs')
+    model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=1, solver='linear')
+    #model = LogisticRegression(penalty='l2', multi_class='ovr', class_weight='balanced', n_jobs=16, solver='lbfgs')
     model.fit(train_x, train_y)  
     return model 
-  
+
+ 
+# SGDClassifier 
+def sgd_regression_classifier(train_x, train_y):  
+    from sklearn.linear_model import SGDClassifier
+    model = SGDClassifier(alpha=0.0001, average=False, class_weight='balanced', epsilon=0.1,
+                          eta0=0.0, fit_intercept=True, l1_ratio=0.15,
+                          learning_rate='optimal', loss='hinge', max_iter=None, n_iter=None,
+                          n_jobs=1, penalty='l2', power_t=0.5, random_state=None,
+                          shuffle=True, tol=None, verbose=0, warm_start=False)
+
+    model.fit(train_x, train_y)
+    return model
   
 # Random Forest Classifier  
 def random_forest_classifier(train_x, train_y):  
@@ -125,10 +167,13 @@ if __name__ == '__main__':
     thresh = 0.5  
     model_save_file = None  
     model_save = {}  
+
+    logfilename="train.log"
+    logger = create_logger(logfilename)
       
     test_classifiers = ['NB', 'LR', 'RF', 'DT', 'GBDT','SVM', 'SVMCV', 'KNN']
     test_classifiers = ['NB', 'RF', 'DT', 'GBDT', 'LR', 'KNN']
-    test_classifiers = ['NB', 'RF', 'DT', 'GBDT', 'LR', 'KNN']
+    test_classifiers = ['NB', 'SGDLR', 'DT', 'RF', 'GBDT']
     classifiers = {'NB':naive_bayes_classifier,
                   'KNN':knn_classifier,
                    'LR':logistic_regression_classifier,
@@ -137,6 +182,7 @@ if __name__ == '__main__':
                   'SVM':svm_classifier,
                 'SVMCV':svm_cross_validation,  
                 'SVMCV2':svm_cross_validation2,  
+                'SGDLR': sgd_regression_classifier,
                  'GBDT':gradient_boosting_classifier  
     }
 
@@ -144,23 +190,30 @@ if __name__ == '__main__':
     fea_num = int(sys.argv[3])
     fs_method = sys.argv[4]
       
-    print 'reading training and testing data...'  
+    sinfo = 'reading training and testing data...'  
+    logger.info(sinfo)
+
     train_x, train_y, test_x, test_y = read_data(train_fname, test_fname, fea_num)  
     num_train, num_feat = train_x.shape  
     num_test, num_feat = test_x.shape  
     num_test_true = np.where(test_y == 1)[0][1]
     is_binary_class = (len(np.unique(train_y)) == 2)  
-    print '******************** Data Info *********************'  
-    print '#training data: %d, #testing_data: %d, dimension: %d' % (num_train, num_test, num_feat)  
+    sinfo = 'training data: %d, #testing_data: %d, dimension: %d' % (num_train, num_test, num_feat)  
+    logger.info(sinfo)
 
     sys.stdout.flush()
 
     for classifier in test_classifiers:  
-        print '******************* %s ********************' % classifier  
+        sinfo =  '******************* %s ********************' % classifier  
+        logger.info(sinfo)
+
         start_time = time.time()
         model = classifiers[classifier](train_x, train_y)
         use_time = time.time() - start_time
-        print 'classifier: %s training took time: %fs' % (classifier, use_time)  
+
+        stat_info = 'classifier: %s training took time: %fs' % (classifier, use_time)  
+        logger.info(stat_info)
+
         predict = model.predict(test_x)  
 
         if model_save_file != None:  
@@ -175,11 +228,10 @@ if __name__ == '__main__':
         f1_micro = metrics.f1_score(test_y, predict, average='micro')  
         f1_macro = metrics.f1_score(test_y, predict, average='macro')  
 
-        stat_info = "LINEINFO:\t%s\t%s\t%s\t%s\t%s\t%s\t%.4f\t%.4f\t%.4f" % \
-                (classifier, fs_method, num_train, num_test, num_feat, use_time, accuracy, f1_micro, f1_macro) 
+        stat_info = "TRAIN RESULT: %s\t%s\t%s\t%s\t%s\t%s\t%.2f\t%.4f\t%.4f\t%.4f" % \
+                (train_fname, classifier, fs_method, num_train, num_test, num_feat, use_time, accuracy, f1_micro, f1_macro) 
 
-        print stat_info
-        sys.stdout.flush()
+        logger.info(stat_info)
   
     if model_save_file != None:  
         pickle.dump(model_save, open(model_save_file, 'wb'))  
