@@ -48,22 +48,23 @@ def line2sample(line):
     if len(arr) != 5:
         return None
 
-    ans['accusation'] = arr[1].split(',')
-    ans['articles'] = arr[2].split(',')
+    ans['accusation'] = [int(x) for x in arr[1].split(',')]
+    ans['articles'] = [int(x) for x in arr[2].split(',')]
     ans['imprisonment'] = int(arr[3])
 
     ws = arr[4].split(',')
-    #word_poses = [x.split(' ') for x in ws ]
-    words = [x.split(' ')[0] for x in ws ]
+    #words = [x.split(' ')[0] for x in ws ]
+    word_poses = [x.split(' ') for x in ws ]
+    words = [x for x,p in word_poses if p[0] != u'u' and p[0] != u'x']
     text = ' '.join(words)
 
     return (ans, text)
 
 class PredictorLocal(object):
-    def __init__(self, tfidf_model, law_model, accu_model, time_model):
+    def __init__(self, tfidf_model, accu_model, law_model, time_model):
         self.tfidf = tfidf_model
-        self.law = law_model
         self.accu = accu_model
+        self.law = law_model
         self.time = time_model
 
     def predict_law(self, vec):
@@ -116,7 +117,7 @@ class PredictorLocal(object):
         ans['imprisonment'] = self.predict_time(vec)
         return ans
 
-    def predict_file(test_filename):
+    def predict_file(self, test_filename):
         all_test_predicts = []
         all_test_labels = []
         test_f = open(test_filename, encoding='utf8')
@@ -126,7 +127,8 @@ class PredictorLocal(object):
                 continue
 
             label, text = sample
-            vec = self.tfidf.transform([fact])
+            vec = self.tfidf.transform([text])
+            ans = {}
             ans['accusation'] = self.predict_accu(vec)
             ans['articles'] = self.predict_law(vec)
             ans['imprisonment'] = self.predict_time(vec)
@@ -200,7 +202,7 @@ def read_trainData(path):
         alltext.append(text)
         accu_label.append(label['accusation'][0])
         law_label.append(label['articles'][0])
-        time_label.append(label['imprisonment'])
+        time_label.append(gettime(label['imprisonment']))
 
 
     fin.close()
