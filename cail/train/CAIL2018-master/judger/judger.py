@@ -1,6 +1,7 @@
 from math import log
 import os
 import json
+import pdb
 
 
 class Judger:
@@ -45,6 +46,73 @@ class Judger:
         rex["articles"] = res_art
 
         return rex
+
+    # Gen new results according to the truth and users output
+    def gen_new_result2(self, result, truth, label):
+        s1 = set(label["accusation"])
+        s2 = set(truth["accusation"])
+
+        for a in range(0, self.task1_cnt):
+            in1 = (a + 1) in s1
+            in2 = (a + 1) in s2
+            if in1:
+                if in2:
+                    result[0][a]["TP"] += 1
+                else:
+                    result[0][a]["FP"] += 1
+            else:
+                if in2:
+                    result[0][a]["FN"] += 1
+                else:
+                    result[0][a]["TN"] += 1
+
+        s1 = set(label["articles"])
+        s2 = set(truth["articles"])
+
+        for a in range(0, self.task2_cnt):
+            in1 = (a + 1) in s1
+            in2 = (a + 1) in s2
+            if in1:
+                if in2:
+                    result[1][a]["TP"] += 1
+                else:
+                    result[1][a]["FP"] += 1
+            else:
+                if in2:
+                    result[1][a]["FN"] += 1
+                else:
+                    result[1][a]["TN"] += 1
+
+        result[2]["cnt"] += 1
+
+        sc = 0
+        imp1 = label["imprisionment"]
+        imp2 = truth["imprisionment"]
+
+        if imp2 == -2 or imp1 == -1:
+            if imp2 == imp1:
+                sc = 1
+        else:
+            if imp1 < 0:
+                sc = 0
+            else:
+                v = abs(log(imp1 + 1) - log(imp2 + 1))
+                if v <= 0.2:
+                    sc = 1
+                elif v <= 0.4:
+                    sc = 0.8
+                elif v <= 0.6:
+                    sc = 0.6
+                elif v <= 0.8:
+                    sc = 0.4
+                elif v <= 1.0:
+                    sc = 0.2
+                else:
+                    sc = 0
+        sc = sc * 1.0
+        result[2]["score"] += sc
+
+        return result
 
     # Gen new results according to the truth and users output
     def gen_new_result(self, result, truth, label):
@@ -196,7 +264,7 @@ class Judger:
             cnt += 1
             ground_truth = truthes[i]
             user_output = user_predicts[i]
-            result = self.gen_new_result(result, ground_truth, user_output)
+            result = self.gen_new_result2(result, ground_truth, user_output)
     
         return result
 

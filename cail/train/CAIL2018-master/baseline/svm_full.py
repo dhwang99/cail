@@ -41,6 +41,24 @@ def create_logger(logfilename=None, logName=None) :
     logger.setLevel(logging.DEBUG)
     return logger
 
+
+def line2sample(line):
+    ans = {}
+    arr = line.strip().split('\t')
+    if len(arr) != 5:
+        return None
+
+    ans['accusation'] = arr[1].split(',')
+    ans['articles'] = arr[2].split(',')
+    ans['imprisonment'] = int(arr[3])
+
+    ws = arr[4].split(',')
+    #word_poses = [x.split(' ') for x in ws ]
+    words = [x.split(' ')[0] for x in ws ]
+    text = ' '.join(words)
+
+    return (ans, text)
+
 class PredictorLocal(object):
     def __init__(self, tfidf_model, law_model, accu_model, time_model):
         self.tfidf = tfidf_model
@@ -50,11 +68,11 @@ class PredictorLocal(object):
 
     def predict_law(self, vec):
         y = self.law.predict(vec)
-        return [y[0]+1]
+        return [y[0]]
     
     def predict_accu(self, vec):
         y = self.accu.predict(vec)
-        return [y[0]+1]
+        return [y[0]]
     
     def predict_time(self, vec):
         if self.time == None:
@@ -98,22 +116,25 @@ class PredictorLocal(object):
         ans['imprisonment'] = self.predict_time(vec)
         return ans
 
+    def predict_file(test_filename):
+        all_test_predicts = []
+        all_test_labels = []
+        test_f = open(test_filename, encoding='utf8')
+        for line in test_f:
+            sample = line2sample(line)
+            if None == sample:
+                continue
 
-def cut_text(alltext, seg_method='jieba'):
-    count = 0    
-    cut = thulac.thulac(seg_only = True)
-    train_text = []
-    for text in alltext:
-        count += 1
-        if count % 2000 == 0:
-            print(count)
-        if seg_method == 'jieba':
-            arr = jieba.cut(text, cut_all=False, HMM=False)
-            train_text.append(' '.join(arr))
-        else:
-            train_text.append(cut.fast_cut(text, text = True))
-    
-    return train_text
+            label, text = sample
+            vec = self.tfidf.transform([fact])
+            ans['accusation'] = self.predict_accu(vec)
+            ans['articles'] = self.predict_law(vec)
+            ans['imprisonment'] = self.predict_time(vec)
+
+            all_test_predicts.append(ans)
+            all_test_labels.append(label)
+        
+        return all_test_labels, all_test_predicts
 
 
 def train_tfidf(train_data, dim=5000, ngram=3, min_df=5):
@@ -134,6 +155,27 @@ def train_tfidf(train_data, dim=5000, ngram=3, min_df=5):
     
     return tfidf
 
+def gettime(time):
+    #将刑期用分类模型来做
+    v = time
+    if v == -2:
+        return 0
+    if v == -1:
+        return 1
+    elif v > 10 * 12:
+        return 2
+    elif v > 7 * 12:
+        return 3
+    elif v > 5 * 12:
+        return 4
+    elif v > 3 * 12:
+        return 5
+    elif v > 2 * 12:
+        return 6
+    elif v > 1 * 12:
+        return 7
+    else:
+        return 8
 
 def read_trainData(path):
     fin = open(path, 'r', encoding = 'utf8')
@@ -144,33 +186,22 @@ def read_trainData(path):
     law_label = []
     time_label = []
 
-    line = fin.readline()
-    while line:
-        aa = line.strip().split('\t')
-        if len(aa) != 4:
+    linid = 0
+    for line in fin:
+        linid += 1
+        if linid%5000 == 0:
+            print("Process train file at: %d" % linid)
+
+        sample = line2sample(line)
+        if None == sample:
             continue
 
-        accids = aa[1].split(',')
-        law = aa[2].split(',')
-        time = 0
-        
-        ws = aa[3].split(',')
-        word_poses = [x.split(' ') for x in ws ]
-        words = ' '.join(map(lambda x:x[0], word_poses))
+        label, text = sample
+        alltext.append(text)
+        accu_label.append(label['accusation'][0])
+        law_label.append(label['articles'][0])
+        time_label.append(label['imprisonment'])
 
-        alltext.append(words)
-        accu_label.append(int(accids[0]))
-        law_label.append(int(law[0]))
-        time_label.append(time)
-
-        '''
-        d = json.loads(line)
-        alltext.append(d['fact'])
-        accu_label.append(data.getlabel(d, 'accu'))
-        law_label.append(data.getlabel(d, 'law'))
-        time_label.append(data.getlabel(d, 'time'))
-        '''
-        line = fin.readline()
 
     fin.close()
 
@@ -192,17 +223,16 @@ if __name__ == '__main__':
     root_logger = create_logger()
     logger = create_logger(logfilename)
 
-    print('reading...')
     dim = int(sys.argv[1])
     seg_method = sys.argv[2]
     ngram = int(sys.argv[3])
     min_df = int(sys.argv[4])
     train_fname = sys.argv[5]
+    test_filename = sys.argv[6]
 
     #train
+    print('reading train data...')
     train_data, accu_label, law_label, time_label = read_trainData(train_fname)
-    print('cut text...')
-    #train_data = cut_text(alltext, seg_method)
     print('train tfidf...')
     tfidf = train_tfidf(train_data, dim, ngram, min_df)
     
@@ -213,27 +243,17 @@ if __name__ == '__main__':
     print('law SVC')
     law = train_SVC(vec, law_label)
     print('time SVC')
-    time = None
-    #time = train_SVC(vec, time_label)
+    time = train_SVC(vec, time_label)
    
     #test
-    test_filename='data_test.json'
-    pred = PredictorLocal(tfidf, law, accu, time)
-    all_test_predicts = []
-    all_test_metas = []
-    test_f = open(test_filename)
-    for line in test_f:
-        js = json.loads(line)
-        text = js["fact"]
-        meta = js["meta"]
-
-        ans = pred.predict(text)
-        all_test_predicts.append(ans)
-        all_test_metas.append(meta)
+    print('predict')
+    predictor = PredictorLocal(tfidf, accu, law, time)
+    test_label, test_predict = predictor.predict_file(test_filename)
     
     #metrics
     judge = Judger("../baseline/accu.txt", "../baseline/law.txt")
-    result = judge.test2(all_test_metas, all_test_predicts)
+    result = judge.test2(test_label, test_predict)
+    print(result)
     rst = judge.get_score(result)
 
     print(rst)
