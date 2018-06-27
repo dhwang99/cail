@@ -241,14 +241,18 @@ if __name__ == '__main__':
     vec = tfidf.transform(train_data)
     
     print('accu SVC')
+    sys.stdout.flush()
     accu = train_SVC(vec, accu_label)
     print('law SVC')
+    sys.stdout.flush()
     law = train_SVC(vec, law_label)
     print('time SVC')
+    sys.stdout.flush()
     time = train_SVC(vec, time_label)
    
     #test
     print('predict')
+    sys.stdout.flush()
     predictor = PredictorLocal(tfidf, accu, law, time)
     test_label, test_predict = predictor.predict_file(test_filename)
     
@@ -262,7 +266,7 @@ if __name__ == '__main__':
     rstr = "ACCU:(%.4f, %.4f, %.4f); LAW:(%.4f, %.4f, %.4f) TIME: %.4f"% \
             (rst[0][0], rst[0][1], rst[0][2], rst[1][0], rst[1][1], rst[1][2], rst[2]) 
 
-    sinfo = 'Seg:%s DIM:%s NGRAM:%d RESULT: %s' % (seg_method, dim, ngram, rstr)
+    sinfo = 'TrainFile: %s Seg:%s DIM:%s NGRAM:%d RESULT: %s' % (train_fname, seg_method, dim, ngram, rstr)
     logger.info(sinfo)
 
     print('begin test model:')

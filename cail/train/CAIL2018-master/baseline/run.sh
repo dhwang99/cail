@@ -2,19 +2,19 @@
 
 basedir=`pwd`
 
-ngrams="3 1"
 ngrams="1 3"
+ngrams="3 1"
 dims1="5000 10000 20000 30000 50000"
 dims2="100000 150000 200000 300000 4000000"
 
-dims1="50000 100000"
-dims2="200000 300000"
+dims1="100000"
+dims2="200000"
 seg_methods='jieba thulac'
 seg_methods='jieba'
 min_df=20
 
-train_fname="../../segdocs/big.seg_by_jieba.clear.old"
 train_fname="../../segdocs/small.seg_by_jieba"
+train_fname="../../segdocs/big.seg_by_jieba.clear"
 test_fname="../../segdocs/test.seg_by_jieba"
 
 loop_train() 
