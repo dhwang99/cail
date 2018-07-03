@@ -5,10 +5,10 @@ basedir=`pwd`
 ngrams="1 3"
 ngrams="3 1"
 dims1="5000 10000 20000 30000 50000"
-dims2="100000 150000 200000 300000 4000000"
 
 dims1="100000"
 dims2="200000"
+dims2="100000 150000 200000 300000 4000000"
 seg_methods='jieba thulac'
 seg_methods='jieba'
 min_df=20
@@ -29,10 +29,11 @@ loop_train()
     for dim in $dims
     do
         echo "Process $dim"
-        python3 svm_full.py  $dim $seg_method $ngram  $min_df $train_fname $test_fname &
+        python3 svm_full.py  $dim $seg_method $ngram  $min_df $train_fname $test_fname 
+        #python3 svm_full.py  $dim $seg_method $ngram  $min_df $train_fname $test_fname &
     done 
 
-    wait
+    #wait
 }
 
 for ngram in $ngrams

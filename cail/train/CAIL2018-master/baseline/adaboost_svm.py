@@ -7,7 +7,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 from __future__ import division
-#import six 
+import six 
 
 from sklearn.feature_extraction.text import TfidfVectorizer as TFIDF
 import json
@@ -16,8 +16,8 @@ import sys
 from judger import Judger
 from sklearn.svm import LinearSVC
 from sklearn.externals import joblib
+from sklearn.ensemble import AdaBoostClassifier
 import pickle
-#import thulac
 import jieba
 import pdb
 
@@ -80,11 +80,15 @@ class PredictorLocal(object):
         self.time = time_model
 
     def predict_law(self, vec):
-        y = self.law.predict(vec)
+        y = [-1]
+        if self.law != None:
+            y = self.law.predict(vec)
         return [y[0]]
     
     def predict_accu(self, vec):
-        y = self.accu.predict(vec)
+        y = [-1]
+        if self.accu != None:
+            y = self.accu.predict(vec)
         return [y[0]]
     
     def predict_time(self, vec):
@@ -224,12 +228,24 @@ def read_trainData(path):
     return alltext, accu_label, law_label, time_label
 
 
-def train_SVC(vec, label, class_weight=None):
-    SVC = LinearSVC(class_weight=class_weight)
+def train_SVC(vec, label):
+    SVC = LinearSVC(class_weight='balanced')
 
     #SVC = LinearSVC()
     SVC.fit(vec, label)
     return SVC
+
+def train_Adaboost_SVC(vec, label):
+    SVC = LinearSVC()
+    bdt_real = AdaBoostClassifier(
+            base_estimator=SVC,
+            n_estimators=10,
+            algorithm='SAMME',
+            learning_rate=1)
+
+    #SVC = LinearSVC()
+    bdt_real.fit(vec, label)
+    return bdt_real 
 
 
 if __name__ == '__main__':
@@ -245,9 +261,6 @@ if __name__ == '__main__':
     min_df = int(sys.argv[4])
     train_fname = sys.argv[5]
     test_filename = sys.argv[6]
-    class_weight = sys.argv[7]
-    if class_weight == 'none':
-        class_weight = None
 
     #train
     print('reading train data...')
@@ -256,20 +269,33 @@ if __name__ == '__main__':
     print('train tfidf...')
     sys.stdout.flush()
     tfidf = train_tfidf(train_data, dim, ngram, min_df)
+
+    tf_voc = tfidf.vocabulary_
+    tf_stopwords = tfidf.stop_words_ 
+
+    pdb.set_trace()
     
     print('transorm datat...')
     sys.stdout.flush()
     vec = tfidf.transform(train_data)
     
+    law = None
+    accu = None
+    time = None
+
+    sinfo = "vocsize: %d stopwords: %d datasize: %d" % (len(tf_voc), len(tf_stopwords), len(train_data))
+    logger.info(sinfo)
+
     print('accu SVC')
     sys.stdout.flush()
-    accu = train_SVC(vec, accu_label, class_weight)
+    accu = train_Adaboost_SVC(vec, accu_label)
+    #accu = train_SVC(vec, accu_label)
     print('law SVC')
     sys.stdout.flush()
-    law = train_SVC(vec, law_label, class_weight)
+    #law = train_SVC(vec, law_label)
     print('time SVC')
     sys.stdout.flush()
-    time = train_SVC(vec, time_label, class_weight)
+    #time = train_SVC(vec, time_label)
    
     #test
     print('predict')
@@ -287,8 +313,7 @@ if __name__ == '__main__':
     rstr = "ACCU:(%.4f, %.4f, %.4f); LAW:(%.4f, %.4f, %.4f) TIME: %.4f"% \
             (rst[0][0], rst[0][1], rst[0][2], rst[1][0], rst[1][1], rst[1][2], rst[2]) 
 
-    sinfo = 'TrainFile: %s Seg:%s DIM:%s NGRAM:%d CLASS_WEIGHT: %s RESULT: %s' % \
-            (train_fname, seg_method, dim, ngram, class_weight, rstr)
+    sinfo = 'Prog:%s TrainFile:%s Seg:%s DIM:%s NGRAM:%d RESULT: %s' % (sys.argv[0], train_fname, seg_method, dim, ngram, rstr)
     logger.info(sinfo)
 
     print('begin test model:')

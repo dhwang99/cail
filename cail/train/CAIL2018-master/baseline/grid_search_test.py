@@ -7,18 +7,29 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 from __future__ import division
-#import six 
+from pprint import pprint
+import six 
+from time import time
 
-from sklearn.feature_extraction.text import TfidfVectorizer as TFIDF
+import multiprocessing as mp
+mp.set_start_method('forkserver')
+
+from sklearn.feature_extraction.text import TfidfVectorizer 
+from sklearn.linear_model import SGDClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.cross_validation import PredefinedSplit
+from sklearn.metrics import f1_score, make_scorer
+
 import json
 from predictor import data
 import sys
 from judger import Judger
 from sklearn.svm import LinearSVC
 from sklearn.externals import joblib
+from sklearn.ensemble import AdaBoostClassifier
+import numpy as np
 import pickle
-#import thulac
-import jieba
 import pdb
 
 
@@ -80,11 +91,15 @@ class PredictorLocal(object):
         self.time = time_model
 
     def predict_law(self, vec):
-        y = self.law.predict(vec)
+        y = [-1]
+        if self.law != None:
+            y = self.law.predict(vec)
         return [y[0]]
     
     def predict_accu(self, vec):
-        y = self.accu.predict(vec)
+        y = [-1]
+        if self.accu != None:
+            y = self.accu.predict(vec)
         return [y[0]]
     
     def predict_time(self, vec):
@@ -115,11 +130,6 @@ class PredictorLocal(object):
         
     def predict(self, content, seg_method='jieba'):
         fact = ''
-        if seg_method == 'jieba':
-            a = jieba.cut(content, cut_all=False, HMM=False)
-            fact = ' '.join(a)
-        else:
-            fact = self.cut.fast_cut(content, text = True)
         
         vec = self.tfidf.transform([fact])
         ans = {}
@@ -152,6 +162,12 @@ class PredictorLocal(object):
         return all_test_labels, all_test_predicts
 
 
+def f1_func(ground_truth, predictions):
+    micro_f1 = f1_score(ground_truth, predictions, average='micro')
+    macro_f1 = f1_score(ground_truth, predictions, average='macro')
+
+    return (micro_f1 + macro_f1) / 2.
+
 def train_tfidf(train_data, dim=5000, ngram=3, min_df=5):
     ngram_range = (1,3)
     if ngram == 1:
@@ -159,7 +175,7 @@ def train_tfidf(train_data, dim=5000, ngram=3, min_df=5):
     elif ngram == 2:
         ngram_range = (1,2)
 
-    tfidf = TFIDF(
+    tfidf = TfidfVectorizer(
             min_df = min_df,
             max_features = dim,
             ngram_range = ngram_range,
@@ -192,14 +208,11 @@ def gettime(time):
     else:
         return 8
 
-def read_trainData(path):
+'''
+只反回了第1个label
+'''
+def read_trainData(path, all_text, accu_label, law_label, time_label):
     fin = open(path, 'rb')
-    
-    alltext = []
-    
-    accu_label = []
-    law_label = []
-    time_label = []
 
     linid = 0
     for line in fin:
@@ -213,7 +226,7 @@ def read_trainData(path):
             continue
 
         label, text = sample
-        alltext.append(text)
+        all_text.append(text)
         accu_label.append(label['accusation'][0])
         law_label.append(label['articles'][0])
         time_label.append(gettime(label['imprisonment']))
@@ -221,20 +234,61 @@ def read_trainData(path):
 
     fin.close()
 
-    return alltext, accu_label, law_label, time_label
+    return linid
 
 
-def train_SVC(vec, label, class_weight=None):
-    SVC = LinearSVC(class_weight=class_weight)
+'''
+返回的label是一个列表, 同时初始化预测结果列表
+'''
+def read_testData(path):
+    all_text = []
+    all_test_predicts = []
+    all_test_labels = []
+
+    test_f = open(test_filename, 'rb')
+    for line in test_f:
+        line = line.decode('utf8')
+        sample = line2sample(line)
+        if None == sample:
+            continue
+
+        label, text = sample
+        ans = {}
+        ans['accusation'] = [-1]
+        ans['articles'] = [-1]
+        ans['imprisonment'] = -3
+
+        all_text.append(text)
+        all_test_predicts.append(ans)
+        all_test_labels.append(label)
+
+    test_f.close()
+
+    return all_text, all_test_labels, all_test_predicts 
+
+
+def train_SVC(vec, label):
+    SVC = LinearSVC(class_weight='balanced')
 
     #SVC = LinearSVC()
     SVC.fit(vec, label)
     return SVC
 
+def train_Adaboost_SVC(vec, label):
+    SVC = LinearSVC()
+    bdt_real = AdaBoostClassifier(
+            base_estimator=SVC,
+            n_estimators=10,
+            algorithm='SAMME',
+            learning_rate=1)
+
+    #SVC = LinearSVC()
+    bdt_real.fit(vec, label)
+    return bdt_real 
+
 
 if __name__ == '__main__':
     import logging
-    jieba.setLogLevel(logging.CRITICAL)
     logfilename="train.log"
     root_logger = create_logger()
     logger = create_logger(logfilename)
@@ -245,41 +299,86 @@ if __name__ == '__main__':
     min_df = int(sys.argv[4])
     train_fname = sys.argv[5]
     test_filename = sys.argv[6]
-    class_weight = sys.argv[7]
-    if class_weight == 'none':
-        class_weight = None
+    val_filename = sys.argv[7]
 
     #train
     print('reading train data...')
     sys.stdout.flush()
-    train_data, accu_label, law_label, time_label = read_trainData(train_fname)
-    print('train tfidf...')
-    sys.stdout.flush()
-    tfidf = train_tfidf(train_data, dim, ngram, min_df)
     
-    print('transorm datat...')
-    sys.stdout.flush()
-    vec = tfidf.transform(train_data)
+    #所有训练文本
+    train_data = []
+
+    accu_label = []
+    law_label = []
+    time_label = []
+    print('reading train data.')
+    train_docs_num = read_trainData(train_fname, train_data, accu_label, law_label, time_label)
     
-    print('accu SVC')
+    print('reading val data.')
+    val_docs_num = read_trainData(val_filename, train_data, accu_label, law_label, time_label)
+
+
+    print('reading test data...')
     sys.stdout.flush()
-    accu = train_SVC(vec, accu_label, class_weight)
-    print('law SVC')
-    sys.stdout.flush()
-    law = train_SVC(vec, law_label, class_weight)
-    print('time SVC')
-    sys.stdout.flush()
-    time = train_SVC(vec, time_label, class_weight)
-   
+    test_data, test_labels, test_predicts = read_testData(test_filename)
+    
+    law_model = None
+    accu_model = None
+    time_model = None
+
+    pipeline = Pipeline([
+        ('tfidf', TfidfVectorizer()),
+        ('clf', SGDClassifier()),
+    ])
+
+    # uncommenting more parameters will give better exploring power but will
+    # increase processing time in a combinatorial way
+    parameters = {
+        'tfidf__max_df': [0.75, 1.],   #过滤了几十个词
+        'tfidf__min_df': (5, 10, 20, 50),
+        'tfidf__max_features': (200000, 400000, 600000),
+        'tfidf__ngram_range': [(1, 3)],  # unigrams or trigrams,  use trigrams
+        'tfidf__use_idf': [1],
+        'tfidf__norm': ('l1', 'l2'),
+        'clf__alpha': (0.00001, 0.000005, 0.000001),
+        'clf__penalty': ('l2', 'elasticnet'),
+        #'clf__n_iter': (10, 50, 80),
+
+    }
+
+    test_fold = np.zeros((train_docs_num + val_docs_num), dtype='int')
+    test_fold[:train_docs_num] = -1
+    ps = PredefinedSplit(test_fold = test_fold)
+    
+    t0 = time()
+
+    my_score = make_scorer(f1_func, greater_is_better=True)
+    grid_search = GridSearchCV(pipeline, parameters, cv=ps, n_jobs=-1, verbose=1, scoring=my_score)
+
+    print("Performing grid search...")
+    print("pipeline:", [name for name, _ in pipeline.steps])
+    print("parameters:")
+    pprint(parameters)
+
+    grid_search.fit(train_data, accu_label)
+
+    print("done in %0.3fs" % (time() - t0))
+
+    print("Best score: %0.3f" % grid_search.best_score_)
+    print("Best parameters set:")
+    best_parameters = grid_search.best_estimator_.get_params()
+    for param_name in sorted(parameters.keys()):
+        print("\t%s: %r" % (param_name, best_parameters[param_name]))
+
+
     #test
-    print('predict')
-    sys.stdout.flush()
-    predictor = PredictorLocal(tfidf, accu, law, time)
-    test_label, test_predict = predictor.predict_file(test_filename)
-    
-    #metrics
+    _predicts = grid_search.best_estimator_.predict(test_data)
+    for i in xrange(len(_predicts)):
+        lab = _predicts[i]
+        test_predicts[i]['accusation'] = [lab]
+
     judge = Judger("../baseline/accu.txt", "../baseline/law.txt")
-    result = judge.test2(test_label, test_predict)
+    result = judge.test2(test_labels, test_predicts)
     print(result)
     rst = judge.get_score(result)
 
@@ -287,13 +386,6 @@ if __name__ == '__main__':
     rstr = "ACCU:(%.4f, %.4f, %.4f); LAW:(%.4f, %.4f, %.4f) TIME: %.4f"% \
             (rst[0][0], rst[0][1], rst[0][2], rst[1][0], rst[1][1], rst[1][2], rst[2]) 
 
-    sinfo = 'TrainFile: %s Seg:%s DIM:%s NGRAM:%d CLASS_WEIGHT: %s RESULT: %s' % \
-            (train_fname, seg_method, dim, ngram, class_weight, rstr)
+    sinfo = 'Prog:%s TrainFile:%s Seg:%s DIM:%s NGRAM:%d RESULT: %s' % (sys.argv[0], train_fname, seg_method, dim, ngram, rstr)
     logger.info(sinfo)
 
-    print('begin test model:')
-    print('saving model')
-    joblib.dump(tfidf, 'predictor/model/tfidf.model')
-    joblib.dump(accu, 'predictor/model/accu.model')
-    joblib.dump(law, 'predictor/model/law.model')
-    joblib.dump(time, 'predictor/model/time.model')
