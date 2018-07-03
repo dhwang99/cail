@@ -8,10 +8,11 @@ dims1="5000 10000 20000 30000 50000"
 
 dims1="100000"
 dims2="200000"
-dims2="100000 150000 200000 300000 4000000"
-seg_methods='jieba thulac'
+dims="100000 150000 200000 300000 400000 500000 600000"
 seg_methods='jieba'
 min_df=20
+balance='balanced'
+balances='none balanced'
 
 train_fname="../../segdocs/small.seg_by_jieba"
 train_fname="../../segdocs/big.seg_by_jieba.clear"
@@ -25,12 +26,12 @@ loop_train()
     min_df=$4
     train_fname=$5
     test_fname=$6
+    class_weight=$7
 
     for dim in $dims
     do
         echo "Process $dim"
-        python3 svm_full.py  $dim $seg_method $ngram  $min_df $train_fname $test_fname 
-        #python3 svm_full.py  $dim $seg_method $ngram  $min_df $train_fname $test_fname &
+        python svm_full.py  $dim $seg_method $ngram  $min_df $train_fname $test_fname $class_weight &
     done 
 
     #wait
@@ -40,7 +41,9 @@ for ngram in $ngrams
 do
     for seg_method in $seg_methods
     do
-        loop_train "$dims1" $seg_method $ngram $min_df $train_fname $test_fname
-        loop_train "$dims2" $seg_method $ngram $min_df $train_fname $test_fname
+	for balance in $balances
+	do
+	    loop_train "$dims" $seg_method $ngram $min_df $train_fname $test_fname $balance
+	done
     done
 done
